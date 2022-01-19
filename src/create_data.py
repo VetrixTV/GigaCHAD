@@ -9,7 +9,7 @@ import cv2, sys, numpy, os
 
 # specifies the method how faces are recognized
 face_classificator = 'haar_cascade_frontal.xml'
-project_path = 'C:\\Users\\adwi\\Documents\\Schule\\Arduino\\GigaCHAD\\src'
+project_path = os.path.curdir
 datasets = 'datasets'
 sub_data = 'videodata'
 
