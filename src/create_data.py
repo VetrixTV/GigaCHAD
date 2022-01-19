@@ -40,13 +40,13 @@ while count < 2147483647:
 
     # draw a rectangle around the recognized face
     for(xCell, yCell, faceWidth, faceHeight) in faces:
-        if count % 600:
+        if count % 3000:
             print('Coordinates will get saved: ', xCell, yCell)
             cv2.rectangle(image, (xCell, yCell), (xCell + faceWidth, yCell + faceHeight), (255, 0, 0), 2)
             face = gray[yCell:yCell + faceHeight, xCell:xCell + faceWidth]
             face_resize = cv2.resize(face, (width, height))
             cv2.imwrite('% s/% s.png' % (dataset_folder_path, count), face_resize)
-        else
+        else:
             cv2.rectangle(image, (xCell, yCell), (xCell + faceWidth, yCell + faceHeight), (255, 0, 0), 2)
             face = gray[yCell:yCell + faceHeight, xCell:xCell + faceWidth]
             face_resize = cv2.resize(face, (width, height))
