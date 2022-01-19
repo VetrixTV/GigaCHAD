@@ -5,7 +5,7 @@ import cv2, sys, numpy, os, csv
 # LOCAL VARIABLES TO CHANGE FOR NEEDS #####################################################################################
 ###########################################################################################################################
 # specifies the dimensions of the camera
-(width, height) = (130, 100)
+(width, height) = (1920, 1080)
 
 # specifies the method how faces are recognized
 face_classificator = 'haar_cascade_frontal.xml'
