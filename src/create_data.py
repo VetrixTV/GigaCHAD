@@ -9,7 +9,7 @@ import cv2, sys, numpy, os
 
 # specifies the method how faces are recognized
 face_classificator = 'haar_cascade_frontal.xml'
-project_path = 'C:\\Users\\bgt.nowanico\\Desktop\\GigaCHAD\\GigaCHAD-main\\src'
+project_path = 'C:\\Users\\adwi\\Documents\\Schule\\Arduino\\GigaCHAD\\src'
 datasets = 'datasets'
 sub_data = 'videodata'
 
@@ -25,8 +25,15 @@ def create_dataset_directory(path):
     else:
         print("Dataset directory already exists.")
 ####################################################################################
-####################################################################################
-def create_image_from_webcam(path, webcam, width, height):
+
+dataset_folder_path = os.path.join(project_path, datasets, sub_data)
+create_dataset_directory(dataset_folder_path)
+
+face_cascade = cv2.CascadeClassifier(face_classificator)
+webcam = cv2.VideoCapture(0)
+
+count = 1
+while count < 30:
     (_, image) = webcam.read()
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.3, 4)
@@ -37,17 +44,6 @@ def create_image_from_webcam(path, webcam, width, height):
         face = gray[yCell:yCell + faceHeight, xCell:xCell + faceWidth]
         face_resize = cv2.resize(face, (width, height))
         cv2.imwrite('% s/% s.png' % (dataset_folder_path, count), face_resize)
-####################################################################################
-
-dataset_folder_path = os.path.join(project_path, datasets, sub_data)
-create_dataset_directory(dataset_folder_path)
-
-face_cascade = cv2.CascadeClassifier(face_classificator)
-webcam = cv2.VideoCapture(0)
-
-count = 1
-while count < 30:
-    create_image_from_webcam(dataset_folder_path, webcam, width, height)
     count += 1
 
     cv2.imshow('OpenCV', image)
