@@ -29,7 +29,11 @@ def create_dataset_directory(path):
 dataset_folder_path = os.path.join(project_path, datasets, sub_data)
 create_dataset_directory(dataset_folder_path)
 
-csv_open = open(os.path.join(project_path, 'coordinates.csv'), 'x')
+csv_file_path = os.path.join(project_path, 'coordinates.csv')
+
+if not os.path.exists(csv_file_path):
+    csv_create = open(os.path.join(project_path, 'coordinates.csv'), 'x')
+    csv_create.close()
 
 face_cascade = cv2.CascadeClassifier(face_classificator)
 webcam = cv2.VideoCapture(0)
@@ -44,13 +48,16 @@ while count < 2147483647:
     for(xCell, yCell, faceWidth, faceHeight) in faces:
         if count % 3000:
             print('Coordinates will get saved: ', xCell, yCell)
-            with open(os.path.join(project_path, 'coordinates.csv'), 'r+') as csv:
+            try:
+                with open(os.path.join(project_path, 'coordinates.csv'), 'r+') as csv:
                 csv.seek(0)
                 csv.truncate()
                 csv.write('X;Y\n')
-                csv.write(xCell, ';', yCell, '\n')
+                csv.write(str(xCell) + ';' + str(yCell) + '\n')
                 csv.close()
-                time.sleep(2000)
+                # Hier muss Leonardo die Datei auslesen!
+            except IOError:
+                print('File is already opened')
             cv2.rectangle(image, (xCell, yCell), (xCell + faceWidth, yCell + faceHeight), (255, 0, 0), 2)
             face = gray[yCell:yCell + faceHeight, xCell:xCell + faceWidth]
             face_resize = cv2.resize(face, (width, height))
