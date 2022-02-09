@@ -29,6 +29,8 @@ def create_dataset_directory(path):
 dataset_folder_path = os.path.join(project_path, datasets, sub_data)
 create_dataset_directory(dataset_folder_path)
 
+csv_open = open(os.path.join(project_path, 'coordinates.csv'), 'x')
+
 face_cascade = cv2.CascadeClassifier(face_classificator)
 webcam = cv2.VideoCapture(0)
 
