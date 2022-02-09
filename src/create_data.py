@@ -56,6 +56,8 @@ while count < 2147483647:
                 csv.write(str(xCell) + ';' + str(yCell) + '\n')
                 csv.close()
                 # Hier muss Leonardo die Datei auslesen!
+                # Mittelpunkt des Bildes bei: X=260 Y=160 (Bei Laptop-Kamera, bei der Amazon-Kamera müssen wir die Mittleren Koordinaten ermitteln)
+                # VIEL SPAß LEONARDO :)
             except IOError:
                 print('File is already opened')
             cv2.rectangle(image, (xCell, yCell), (xCell + faceWidth, yCell + faceHeight), (255, 0, 0), 2)
