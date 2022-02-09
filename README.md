@@ -13,6 +13,7 @@ Was haben wir heute gemacht? Ein kleiner Text von Wilhelm und Nico.
 ## WinzuDarkpaw: Softwaredesign und Umsetzung
 Gesichtserkennung und Kameradatenerhebung, Python Code
 
+
 ### TODO
 - Koordinaten des Gesichts berechnen
 - Koordinaten in eine CSV-Datei packen
