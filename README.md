@@ -1,6 +1,6 @@
 # GigaCHAD
 
-## FÜR DIE DOKUMENTATION
+## FÜR DIE DOKUMENTATION (09.02.2022)
 Was haben wir heute gemacht? Ein kleiner Text von Wilhelm und Nico.
 
 - Die CSV-Datei mit den Koordinaten des Gesichts werden nun in eine CSV-Datei (Projektpfad + coordinates.csv) geschrieben.
