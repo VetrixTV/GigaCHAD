@@ -11,11 +11,11 @@
 - UL Up Left
 - DR Down Right
 - DL Down Left
-- US Up Stop
-- DS Down Stop
-- RS Right Stop
-- LS Left Stop
-- SS Stop Stop
+- US Up and no x movement
+- DS Down and no x movement
+- RS Right and no y movement
+- LS Left and no y movement
+- SS No movement
 
 ## Development reference sites
 

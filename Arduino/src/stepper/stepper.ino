@@ -20,15 +20,51 @@ void loop()
   while (!Serial.available());
   input = Serial.readString();
   Serial.print(input);
-  if(input){
+  if (input) {
     oldInput = input;
   }
-  while(input){
-    if(Serial.available()){
+  while (input) {
+    if (Serial.available()) {
       input = Serial.readString();
       Serial.print(input);
     }
-    stepperX.doSteps(1);
-    stepperY.doSteps(1);
+    input = input.substring(0,2);
+    if (input.equals("UR")) {
+      Serial.print("\nMoving up and to the right");
+      stepperX.doSteps(1);
+      stepperY.doSteps(1);
+    } else if (input.equals("UL")) {
+      Serial.print("\nMoving up and to the left");
+      stepperX.doSteps(-1);
+      stepperY.doSteps(1);
+    } else if (input.equals("DR")) {
+      Serial.print("\nMoving down and to the right");
+      stepperX.doSteps(1);
+      stepperY.doSteps(-1);
+    } else if (input.equals("DL")) {
+      Serial.print("\nMoving down and to the left");
+      stepperX.doSteps(-1);
+      stepperY.doSteps(-1);
+    } else if (input.equals("US")) {
+      Serial.print("\nMoving up and stop x movement");
+      stepperX.doSteps(0);
+      stepperY.doSteps(1);
+    } else if (input.equals("DS")) {
+      Serial.print("\nMoving down and stop x movement");
+      stepperX.doSteps(0);
+      stepperY.doSteps(-1);
+    } else if (input.equals("RS")) {
+      Serial.print("\nMoving right and stop y movement");
+      stepperX.doSteps(1);
+      stepperY.doSteps(0);
+    } else if (input.equals("LS")) {
+      Serial.print("\nMoving left and stop y movement");
+      stepperX.doSteps(-1);
+      stepperY.doSteps(0);
+    } else if (input.equals("SS")) {
+      Serial.print("\nStopping all movements");
+      stepperX.doSteps(0);
+      stepperY.doSteps(0);
+    }
   }
 }
