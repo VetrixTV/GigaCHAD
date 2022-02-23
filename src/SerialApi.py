@@ -1,3 +1,4 @@
+from asyncore import read
 from cmath import log
 from ctypes.wintypes import BYTE
 from socket import timeout
@@ -9,57 +10,73 @@ import csv
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-global initial_y = 0
-global initial_x = 0
 
-global center_y = 0
-global center_x = 0
+center_y = 160
+center_x = 220
 
-global initial_run = True
+toleranceThreshold = 10
 
 file = 'cord.csv'
 
-def initialize(row):
-    center_y = row[0]
-    center_x = row[1]
-    initial_run = False
 
-def move(direction = ['S']):
+
+def move(direction = ['SS']):
     with serial.Serial('COM4', 9800, timeout=1) as ser:
-        for com in direction:
-            time.sleep(0.5)
-            ser.write(bytes(b"".join(com)))
+        time.sleep(0.5)
+        ser.write(bytes(b""+direction))
 
 
 def getDirection(row):
-    direction = []
+    direction = ""
+    
+    # UR Up Right
+    # UL Up Left
+    # DR Down Right
+    # DL Down Left
+    # US Up and no x movement
+    # DS Down and no x movement
+    # RS Right and no y movement
+    # LS Left and no y movement
+    # SS No movement
 
-    if row[1] < center_x + 10 and row[1] > center_x - 10:
-        direction.append('XS')
-    elif row[1] > center_x:
-       direction.append('R')
-    else row[1] < center_x:
-        direction.append('L')
-
-    row[0] < center_y + 10 and row[0] > center_y - 10:
-        direction.append('YS')
-    elif row[0] > center_y:
-       direction.append('U')
-    else row[0] < center_y:
-        direction.append('D')
-    return direction
+    # Cordinates are in the Y Center Cordinate Threshold
+    if row[1] > center_y - toleranceThreshold and row[1] < center_y + toleranceThreshold:
+        
+        # Cordinates are in the X Center Cordinate Threshold
+        if row[0] > center_x - toleranceThreshold and row[0] < center_x + toleranceThreshold:
+            return "SS"
+        # Stop Y Move Left
+        elif row[0] < center_x:
+            return "LS"
+        # Stop Y Move Right
+        else:
+            return 'RS'
+            
+    if row[1] < center_y - toleranceThreshold:
+        direction= 'U'
+    
+    elif row[1] > center_y + toleranceThreshold:
+        direction = 'D'
+    
+    # Cordinates are in the X Center Cordinate Threshold
+    if row[0] > center_x - toleranceThreshold or row[0] < center_x + toleranceThreshold:
+        return direction + "S"  # Stop X Movement and move on Y axis
+    elif row[0] > center_x + toleranceThreshold:
+       return direction + 'R' # Move right and up or Down
+    else :
+        return direction + 'L' # Move Left and up or down
     
 
-# while True:
-with open(ROOT_DIR + "/" + file, newline='') as csvfile:
-    reader = csv.reader(csvfile, delimiter=';')
-    for row in reader:
-        if initial_run:
-            initialize(row)
-            time.sleep(10)
+while True:
+    with open(ROOT_DIR + "/" + file, newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter=';')    
+        for row in reader: 
+            direction = getDirection(row)
             break
-    
-        break
+        csvfile.close();
+        move(direction)
+    time.sleep(1)
+        
 
        
     

@@ -50,11 +50,11 @@ while count < 2147483647:
             print('Coordinates will get saved: ', xCell, yCell)
             try:
                 with open(os.path.join(project_path, 'coordinates.csv'), 'r+') as csv:
-                csv.seek(0)
-                csv.truncate()
-                csv.write('X;Y\n')
-                csv.write(str(xCell) + ';' + str(yCell) + '\n')
-                csv.close()
+                    csv.seek(0)
+                    csv.truncate()
+                    csv.write('X;Y\n')
+                    csv.write(str(xCell) + ';' + str(yCell) + '\n')
+                    csv.close()
                 # Hier muss Leonardo die Datei auslesen!
                 # Mittelpunkt des Bildes bei: X=260 Y=160 (Bei Laptop-Kamera, bei der Amazon-Kamera müssen wir die Mittleren Koordinaten ermitteln)
                 # VIEL SPAß LEONARDO :)
