@@ -23,7 +23,7 @@ file = 'cord.csv'
 def move(direction = ['SS']):
     with serial.Serial('COM4', 9800, timeout=1) as ser:
         time.sleep(0.5)
-        ser.write(bytes(b""+direction))
+        ser.write(direction.encode())
 
 
 def getDirection(row):
