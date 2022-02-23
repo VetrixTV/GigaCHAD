@@ -40,28 +40,28 @@ def getDirection(row):
     # SS No movement
 
     # Cordinates are in the Y Center Cordinate Threshold
-    if row[1] > center_y - toleranceThreshold and row[1] < center_y + toleranceThreshold:
+    if int(row[1]) > center_y - toleranceThreshold and int(row[1]) < center_y + toleranceThreshold:
         
         # Cordinates are in the X Center Cordinate Threshold
-        if row[0] > center_x - toleranceThreshold and row[0] < center_x + toleranceThreshold:
+        if int(row[0]) > center_x - toleranceThreshold and int(row[0]) < center_x + toleranceThreshold:
             return "SS"
         # Stop Y Move Left
-        elif row[0] < center_x:
+        elif int(row[0]) < center_x:
             return "LS"
         # Stop Y Move Right
         else:
             return 'RS'
             
-    if row[1] < center_y - toleranceThreshold:
+    if int(row[1]) < center_y - toleranceThreshold:
         direction= 'U'
     
-    elif row[1] > center_y + toleranceThreshold:
+    elif int(row[1]) > center_y + toleranceThreshold:
         direction = 'D'
     
     # Cordinates are in the X Center Cordinate Threshold
-    if row[0] > center_x - toleranceThreshold or row[0] < center_x + toleranceThreshold:
+    if int(row[0]) > center_x - toleranceThreshold or int(row[0]) < center_x + toleranceThreshold:
         return direction + "S"  # Stop X Movement and move on Y axis
-    elif row[0] > center_x + toleranceThreshold:
+    elif int(row[0]) > center_x + toleranceThreshold:
        return direction + 'R' # Move right and up or Down
     else :
         return direction + 'L' # Move Left and up or down
