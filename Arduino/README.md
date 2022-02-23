@@ -23,5 +23,3 @@
 - [New lib](https://github.com/MicroBahner/MobaTools)
 ---
 ## Finished Tasks
-
-- ...

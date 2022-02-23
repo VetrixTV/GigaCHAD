@@ -1,3 +1,4 @@
+
 #include <MobaTools.h>
 int SPU = 2048;
 
@@ -13,11 +14,13 @@ void setup()
   stepperY.attach( 7, 8, 9, 10);
   stepperX.setSpeed(150);
   stepperY.setSpeed(150);
+
   Serial.begin(9600);
 }
 void loop()
 {
   while (!Serial.available());
+  
   input = Serial.readString();
   Serial.print(input);
   if (input) {
@@ -66,5 +69,7 @@ void loop()
       stepperX.doSteps(0);
       stepperY.doSteps(0);
     }
+
+
   }
 }
