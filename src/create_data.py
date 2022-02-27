@@ -53,10 +53,10 @@ while count < 2147483647:
     (_, image) = webcam.read()
     
     # Rechteck für die X-Achse (mit Toleranzgrenze).
-    cv2.rectangle(image, (0,60), (260,100), (255,0,0), 2)
+    cv2.rectangle(image, (0,520), (1920,560), (255,0,0), 2)
     
     # Rechteck für die Y-Achse (mit Toleranzgrenze).
-    cv2.rectangle(image, (80,0), (140,160), (255, 0, 0), 2)
+    cv2.rectangle(image, (930,0), (990,1080), (255, 0, 0), 2)
     
     # Bild in Graustufen konvertieren.
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
