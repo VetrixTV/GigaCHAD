@@ -14,7 +14,7 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 center_y = 160
 center_x = 220
 
-toleranceThreshold = 10
+toleranceThreshold = 20
 
 file = 'cord.csv'
 
@@ -27,8 +27,6 @@ def move(direction = ['SS']):
 
 
 def getDirection(row):
-    direction = ""
-    
     # UR Up Right
     # UL Up Left
     # DR Down Right
@@ -40,7 +38,8 @@ def getDirection(row):
     # SS No movement
 
     # Cordinates are in the Y Center Cordinate Threshold
-    if int(row[1]) > center_y - toleranceThreshold and int(row[1]) < center_y + toleranceThreshold:
+    #Y threshhold * 1.5 because the Y coordinate span is smaller than the X coordinate span
+    if int(row[1]) > (center_y - (toleranceThreshold * 1.5)) and int(row[1]) < (center_y + (toleranceThreshold * 1.5)):
         
         # Cordinates are in the X Center Cordinate Threshold
         if int(row[0]) > center_x - toleranceThreshold and int(row[0]) < center_x + toleranceThreshold:
@@ -52,10 +51,10 @@ def getDirection(row):
         else:
             return 'RS'
             
-    if int(row[1]) < center_y - toleranceThreshold:
+    if int(row[1]) < (center_y - (toleranceThreshold * 1.5)):
         direction= 'U'
     
-    elif int(row[1]) > center_y + toleranceThreshold:
+    elif int(row[1]) > (center_y + toleranceThreshold * 1.5):
         direction = 'D'
     
     # Cordinates are in the X Center Cordinate Threshold
@@ -67,6 +66,7 @@ def getDirection(row):
         return direction + 'L' # Move Left and up or down
     
 
+#Main, handles the logic
 while True:
     with open(ROOT_DIR + "/" + file, newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=';')    
