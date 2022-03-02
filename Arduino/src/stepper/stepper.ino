@@ -10,27 +10,30 @@ String oldInput;
 
 void setup()
 {
+  // Initialisierung der Steppers
   stepperX.attach( 3, 4, 5, 6);
   stepperY.attach( 7, 8, 9, 10);
   stepperX.setSpeed(150);
   stepperY.setSpeed(150);
-
+ 
   Serial.begin(9600);
 }
 void loop()
 {
   while (!Serial.available());
-  
+  // Einlesung des Inputs 
   input = Serial.readString();
   Serial.print(input);
   if (input) {
     oldInput = input;
   }
   while (input) {
+    // Input neuvergeben wenn neuer Input vorhanden ist
     if (Serial.available()) {
       input = Serial.readString();
       Serial.print(input);
     }
+    // zusammenschneidung der Input VAR auf Maximal 2 Zeichen
     input = input.substring(0,2);
     if (input.equals("UR")) {
       Serial.print("\nMoving up and to the right");
